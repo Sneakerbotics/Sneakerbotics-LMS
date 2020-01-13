@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% if not user %}
+<div class="alert alert-danger" role="alert">
+    You are <b>not currently</b> logged in.
+</div>
+{% endif %}
+{% if user %}
+<div class="card">
+    <div class="card-header">
+        <b>Week 1</b>
+    </div>
+    <div class="card-group">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Introduction</h5>
+                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                <p class="card-text"><small class="text-muted">Released: November 25, 2019</small></p>
+                <a href="#" class="btn btn-primary"><span class="oi oi-video" title="person" aria-hidden="true"></span> Watch</a>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Shell Basics</h5>
+                <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+                <p class="card-text"><small class="text-muted">Released: November 25, 2019</small></p>
+                <a href="#" class="btn btn-primary"><span class="oi oi-video" title="person" aria-hidden="true"></span> Watch</a>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Python Basics</h5>
+                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+                <p class="card-text"><small class="text-muted">Released: November 25, 2019</small></p>
+                <a href="#" class="btn btn-primary"><span class="oi oi-video" title="person" aria-hidden="true"></span> Watch</a>
+            </div>
+        </div>
+    </div>
+</div>
+<br/>
+<div class="card">
+    <div class="card-header">
+        <b>Week 2</b>
+    </div>
+    <div class="card-group">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Introduction</h5>
+                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                <p class="card-text"><small class="text-muted">Released: November 25, 2019</small></p>
+                <a href="#" class="btn btn-primary"><span class="oi oi-video" title="person" aria-hidden="true"></span> Watch</a>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Shell Basics</h5>
+                <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+                <p class="card-text"><small class="text-muted">Released: November 25, 2019</small></p>
+                <a href="#" class="btn btn-primary"><span class="oi oi-video" title="person" aria-hidden="true"></span> Watch</a>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+
+            </div>
+        </div>
+    </div>
+</div>
+<br/>
+<br/>
+<br/>
+<br/>
+{% endif %}
+{% endblock %}

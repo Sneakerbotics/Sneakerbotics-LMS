@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block head %}
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/bootstrap.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.min.css"/>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="{{ url_for('static',filename='js/bootstrap.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static',filename='js/bootstrap.bundle.js') }}"></script>
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
+    <title>Sneakerbotics</title>
+    {% endblock %}
+</head>
+<body>
+{% block nav %}
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">
+        <img src="{{ url_for('static',filename='img/logo.png') }}" width="50" height="50" alt="">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+        <div class="navbar-nav mr-auto">
+            <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
+            {% if user %}
+            <a class="nav-item nav-link" href="/logout">Logout</a>
+            {% else %}
+            <a class="nav-item nav-link" href="/login">Login</a>
+            {% endif %}
+        </div>
+        <a href="#" data-toggle="tooltip" data-html="true" title="Toronto, ON <br> {{ ip }}">
+            {% if user %}
+            <span class="navbar-text">
+                {{ user.name }}#{{ user.discriminator }}
+            </span>
+            {% else %}
+            <span class="navbar-text">
+                Not logged in
+            </span>
+            {% endif %}
+        </a>
+    </div>
+</nav>
+{% endblock %}
+
+{% block jumbotron %}
+<div class="jumbotron">
+    {% if not user %}
+    <h1 class="display-4">Sneakerbotics</h1>
+    <p class="lead">The premier course and learning group to get you on your way to being a sneaker developer.</p>
+    <hr class="my-4">
+    <p>Welcome to our new, fresh, online learning platform written by Luke Davis (<a target="_blank" href="http://twitter.com/R8T3D">@R8T3D</a>). <br/> All login attempts and IPs <b>are recorded</b>. Refrain from using a VPN as this could result in an account ban.</p>
+    {% else %}
+    <h1 class="display-4">Welcome {{ user.name }}!</h1>
+    <p class="lead">View all content below. We are currently on <b>Week</b>.</p>
+    {% endif %}
+</div>
+{% endblock %}
+
+<div class="container">
+    {% block content %}
+    {% endblock %}
+</div>
+
+{% block footer %}
+<nav class="navbar fixed-bottom navbar-dark bg-dark">
+  <span class="navbar-text ">
+    © Sneakerbotics 2020 | All Rights Reserved
+  </span>
+</nav>
+{% endblock %}
+
+</body>
+</html>
