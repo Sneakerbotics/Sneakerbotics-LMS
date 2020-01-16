@@ -1,0 +1,48 @@
+{
+  "weeks":[
+    {
+      "1":[
+        {
+          "name":"Introduction",
+          "description":"Welcome to Sneakerbotics! In this video we will be learning about the Discord, what to expect, and we'll be installing Python!",
+          "date":"11/25/2019",
+          "id":"dsgasdgasdg"
+        },
+        {
+          "name":"Command Line",
+          "description":"In this tutorial we will be learning the basics of how to navigate the seemingly daunting command line.",
+          "date":"11/25/2019",
+          "id":"dsgasdgasdg"
+        },
+        {
+          "name":"Python Basics",
+          "description":"We will be diving into the basics of Python and creating our first basic script!",
+          "date":"11/26/2019",
+          "id":"dsgasdgasdg"
+        }
+      ]
+    },
+    {
+      "2":[
+        {
+          "name":"Advanced Python: Loops, Classes, Scope",
+          "description":"In this tutorial series we dive deep into more advanced concepts like loops, classes, and scope.",
+          "date":"12/02/2019",
+          "id":"dsgasdgasdg"
+        },
+        {
+          "name":"HTTP Requests Part 1",
+          "description":"This lesson covers the basic foundations of HTTP requests and how it relates to sneakers.",
+          "date":"12/04/2019",
+          "id":"dsgasdgasdg"
+        },
+        {
+          "name":"HTTP Requests Part 2",
+          "description":"Continuation of part 1.",
+          "date":"12/05/2019",
+          "id":"dsgasdgasdg"
+        }
+      ]
+    }
+  ]
+}
