@@ -1,15 +1,17 @@
 from flask import Flask, redirect, url_for, render_template, request
 from flask_discord import DiscordOAuth2Session
-from settings import *
+from video_handler import *
+from config import *
+import requests
 
 app = Flask(__name__)
 
-if FLASK_ENVIRONMENT == 'development':
+if FLASK_ENVIRONMENT == 'dev':
     app.secret_key = b"DEV_ENV"
     app.config["DISCORD_REDIRECT_URI"] = "http://localhost:5000/callback"
 else:
     app.secret_key = FLASK_SECRET_KEY
-    app.config["DISCORD_REDIRECT_URI"] = "http://localhost:5000/callback"
+    app.config["DISCORD_REDIRECT_URI"] = DISCORD_REDIRECT_URI
 
 app.config["DISCORD_CLIENT_ID"] = DISCORD_CLIENT_ID
 app.config["DISCORD_CLIENT_SECRET"] = DISCORD_CLIENT_SECRET
@@ -28,6 +30,13 @@ def isLoggedIn():
         user = None
 
     return user
+
+def userIsInSneakerbotics():
+    guilds = discord.fetch_guilds()
+
+    for guild in guilds:
+        if guild.id == 642900909793345536:
+            return True
 
 discord = DiscordOAuth2Session(app)
 
@@ -59,13 +68,40 @@ def admin():
 
 @app.route("/watch/<video>")
 def watch(video):
-    pass
+     user = isLoggedIn()
+     video = str(video)
+
+     VdoCipherHeaders = {
+         'Content-Type': 'application/json',
+         'Accept': 'application/json',
+         'Authorization': 'Apisecret ' + VDOCIPHER_SECRET,
+     }
+
+     VdoCipherParams  = {
+        'ttl': '330'
+     }
+
+     VdoCipherURL = 'https://dev.vdocipher.com/api/videos/' + video + '/otp'
+
+     response = requests.post(VdoCipherURL, headers=VdoCipherHeaders, params=VdoCipherParams)
+     responseJSON = response.json()
+     otp = str(responseJSON['otp'])
+     playbackInfo = str(responseJSON['playbackInfo'])
+     return render_template('watch_video.html', user=user, otp=otp, playbackInfo=playbackInfo)
 
 @app.route("/")
 def index():
     user = isLoggedIn()
 
-    return render_template('index.html', user=user, ip=getUserIP())
-
+    if user:
+        if userIsInSneakerbotics():
+            vh = VideoHandler()
+            weeks=json.dumps(vh.giveWeeks())
+            loaded_weeks = json.loads(weeks)
+            return render_template('index.html', user=user, ip=getUserIP(), weeks=loaded_weeks)
+        else:
+            return render_template('index.html', user=user, ip=getUserIP())
+    else:
+        return render_template('index.html', user=user, ip=getUserIP())
 if __name__ == '__main__':
     app.run()
