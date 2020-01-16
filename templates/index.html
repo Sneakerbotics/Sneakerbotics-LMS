@@ -7,67 +7,27 @@
 </div>
 {% endif %}
 {% if user %}
+{% for week in weeks %}
 <div class="card">
     <div class="card-header">
-        <b>Week 1</b>
+        <b>Week {{ loop.index }}</b>
     </div>
-    <div class="card-group">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Introduction</h5>
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                <p class="card-text"><small class="text-muted">Released: November 25, 2019</small></p>
-                <a href="#" class="btn btn-primary"><span class="oi oi-video" title="person" aria-hidden="true"></span> Watch</a>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Shell Basics</h5>
-                <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                <p class="card-text"><small class="text-muted">Released: November 25, 2019</small></p>
-                <a href="#" class="btn btn-primary"><span class="oi oi-video" title="person" aria-hidden="true"></span> Watch</a>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Python Basics</h5>
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-                <p class="card-text"><small class="text-muted">Released: November 25, 2019</small></p>
-                <a href="#" class="btn btn-primary"><span class="oi oi-video" title="person" aria-hidden="true"></span> Watch</a>
-            </div>
-        </div>
-    </div>
-</div>
-<br/>
-<div class="card">
-    <div class="card-header">
-        <b>Week 2</b>
-    </div>
-    <div class="card-group">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Introduction</h5>
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                <p class="card-text"><small class="text-muted">Released: November 25, 2019</small></p>
-                <a href="#" class="btn btn-primary"><span class="oi oi-video" title="person" aria-hidden="true"></span> Watch</a>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Shell Basics</h5>
-                <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                <p class="card-text"><small class="text-muted">Released: November 25, 2019</small></p>
-                <a href="#" class="btn btn-primary"><span class="oi oi-video" title="person" aria-hidden="true"></span> Watch</a>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-body">
 
+    <div class="card-group">
+    {% for video in week[loop.index|string] %}
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{ video["name"] }}</h5>
+                <p class="card-text">{{ video["description"] }}</p>
+                <p class="card-text"><small class="text-muted">Released: {{ video["date"] }}</small></p>
+                <a href="/watch/{{ video.id }}" class="btn btn-primary"><span class="oi oi-video" title="person" aria-hidden="true"></span> Watch</a>
             </div>
         </div>
+    {% endfor %}
     </div>
 </div>
-<br/>
+<br />
+{% endfor %}
 <br/>
 <br/>
 <br/>
