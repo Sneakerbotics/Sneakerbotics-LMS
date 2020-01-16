@@ -28,7 +28,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarText">
         <div class="navbar-nav mr-auto">
-            <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
+            <a class="nav-item nav-link active" href="/">Home <span class="sr-only">(current)</span></a>
             {% if user %}
             <a class="nav-item nav-link" href="/logout">Logout</a>
             {% else %}
@@ -59,7 +59,7 @@
     <p>Welcome to our new, fresh, online learning platform written by Luke Davis (<a target="_blank" href="http://twitter.com/R8T3D">@R8T3D</a>). <br/> All login attempts and IPs <b>are recorded</b>. Refrain from using a VPN as this could result in an account ban.</p>
     {% else %}
     <h1 class="display-4">Welcome {{ user.name }}!</h1>
-    <p class="lead">View all content below. We are currently on <b>Week</b>.</p>
+    <p class="lead"> View all content below.</p>
     {% endif %}
 </div>
 {% endblock %}
