@@ -1,86 +1,41 @@
-<html lang="en">
+{% extends "base.html" %}
 
+{% block jumbotron %}
 <div class="jumbotron">
-    <h1 class="display-4">Admin Panel</h1>
+    <h1 class="display-4">Welcome {{ user.name }}!</h1>
+    <p class="lead"> Welcome admin!</p>
 </div>
+{% endblock %}
 
+{% block content %}
 <div class="container">
-    {% if not user %}
-    <div class="alert alert-danger" role="alert">
-        You are <b>not currently</b> logged in.
-    </div>
-    {% endif %}
-    {% if user %}
-    <div class="card">
-        <div class="card-header">
-            <b>Week 1</b>
+    <div class="row">
+        <div class="col">
+            <h3 class="card-title">Add A Video</h3>
+            <form>
+                <div class="form-group">
+                    <label>Video Name</label>
+                    <input class="form-control" id="name">
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea class="form-control" id="description" rows="2"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Date</label>
+                    <input class="form-control" id="date">
+                </div>
+                <div class="form-group">
+                    <label>VdoCipher ID</label>
+                    <input class="form-control" id="id">
+                    <small class="form-text text-muted">ID for video from VdoCipher API.</small>
+                </div>
+                <button type="submit" class="btn btn-success">Add Video</button>
+            </form>
         </div>
-        <div class="card-group">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Introduction</h5>
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                    <p class="card-text"><small class="text-muted">Released: November 25, 2019</small></p>
-                    <a href="#" class="btn btn-primary"><span class="oi oi-video" title="person" aria-hidden="true"></span> Watch</a>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Shell Basics</h5>
-                    <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                    <p class="card-text"><small class="text-muted">Released: November 25, 2019</small></p>
-                    <a href="#" class="btn btn-primary"><span class="oi oi-video" title="person" aria-hidden="true"></span> Watch</a>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Python Basics</h5>
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-                    <p class="card-text"><small class="text-muted">Released: November 25, 2019</small></p>
-                    <a href="#" class="btn btn-primary"><span class="oi oi-video" title="person" aria-hidden="true"></span> Watch</a>
-                </div>
-            </div>
+        <div class="col">
+            <button type="button" class="btn btn-success">Add Week</button>
         </div>
     </div>
-    <br/>
-    <div class="card">
-        <div class="card-header">
-            <b>Week 2</b>
-        </div>
-        <div class="card-group">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Introduction</h5>
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                    <p class="card-text"><small class="text-muted">Released: November 25, 2019</small></p>
-                    <a href="#" class="btn btn-primary"><span class="oi oi-video" title="person" aria-hidden="true"></span> Watch</a>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Shell Basics</h5>
-                    <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                    <p class="card-text"><small class="text-muted">Released: November 25, 2019</small></p>
-                    <a href="#" class="btn btn-primary"><span class="oi oi-video" title="person" aria-hidden="true"></span> Watch</a>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-body">
-
-                </div>
-            </div>
-        </div>
-    </div>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
 </div>
-{% endif %}
-
-<nav class="navbar fixed-bottom navbar-dark bg-dark">
-  <span class="navbar-text ">
-    © Sneakerbotics 2019 | All Rights Reserved
-  </span>
-</nav>
-</html>
+{% endblock %}
