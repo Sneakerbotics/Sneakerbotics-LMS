@@ -5,6 +5,7 @@ from config import *
 import requests
 
 app = Flask(__name__)
+vh = VideoHandler()
 
 if FLASK_ENVIRONMENT == 'dev':
     app.secret_key = b"DEV_ENV"
@@ -60,16 +61,17 @@ def admin():
     user = isLoggedIn()
 
     if not user:
-        return redirect(url_for(".index"))
-    elif user.id in ADMINS:
-        return "Hey admin"
+        return "Not a user"
+
+    elif user.id == int(ADMIN):
+        return render_template('admin.html', user=user)
+
     else:
-        return redirect(url_for(".index"))
+        return "Not an admin: " + str(user.id)
 
 @app.route("/watch/<video>")
 def watch(video):
      user = isLoggedIn()
-     video = str(video)
 
      VdoCipherHeaders = {
          'Content-Type': 'application/json',
@@ -85,9 +87,19 @@ def watch(video):
 
      response = requests.post(VdoCipherURL, headers=VdoCipherHeaders, params=VdoCipherParams)
      responseJSON = response.json()
-     otp = str(responseJSON['otp'])
-     playbackInfo = str(responseJSON['playbackInfo'])
-     return render_template('watch_video.html', user=user, otp=otp, playbackInfo=playbackInfo)
+
+     try:
+         otp = str(responseJSON['otp'])
+         playbackInfo = str(responseJSON['playbackInfo'])
+         error=False
+     except:
+         error=True
+         otp=None
+         playbackInfo=None
+
+     title = vh.getVideoTitle(video)
+
+     return render_template('watch_video.html', user=user, otp=otp, playbackInfo=playbackInfo, title=title, error=error)
 
 @app.route("/")
 def index():
@@ -95,13 +107,14 @@ def index():
 
     if user:
         if userIsInSneakerbotics():
-            vh = VideoHandler()
             weeks=json.dumps(vh.giveWeeks())
             loaded_weeks = json.loads(weeks)
             return render_template('index.html', user=user, ip=getUserIP(), weeks=loaded_weeks)
+
         else:
             return render_template('index.html', user=user, ip=getUserIP())
     else:
         return render_template('index.html', user=user, ip=getUserIP())
+
 if __name__ == '__main__':
     app.run()
